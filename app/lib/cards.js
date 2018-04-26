@@ -14,13 +14,13 @@ export const shuffle = (array) => {
 export const newDeck = () => {
     const colour = ['red','green','purple'];
     const number = [1,2,3];
-    const symbol = ['diamond','squiggle','oval'];
+    const shape = ['diamond','squiggle','oval'];
     const fill = ['solid','stripe','stroke'];
     const deck = [];
 
     colour.forEach ( (c) => {
         number.forEach((n) =>{
-            symbol.forEach((s) =>{
+            shape.forEach((s) =>{
                 fill.forEach((f) =>{
                     deck.push({'colour':c, 'number':n, 'shape':s, 'fill':f});
                 });

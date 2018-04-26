@@ -9,7 +9,7 @@ export default class Info extends React.Component{
           {this.props.cards.map((card, i) =>
               <Card colour={card.colour}
                     number={card.number}
-                    symbol={card.symbol}
+                    shape={card.shape}
                     fill={card.fill}
                     key={i} />
           )}

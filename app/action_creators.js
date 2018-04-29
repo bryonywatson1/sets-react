@@ -1,11 +1,15 @@
-export function setupGame(){
-  return {type: "SETUP_GAME"};
-}
+export function setupGame(seed=new Date().getTime()) {
+   return { "type": "SETUP_GAME", seed };
+};
 
-export function setRecord(wins,losses){
+export function setRecord(score){
   return{
     "type":"SET_RECORD",
-    wins,
-    losses
-  }
-}
+    score
+  };
+};
+
+
+export function dealToTable(seed=new Date().getTime()) {
+   return { "type": "DEAL_TO_TABLE", seed };
+};

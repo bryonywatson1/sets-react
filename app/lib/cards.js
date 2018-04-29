@@ -1,9 +1,11 @@
 import { fromJS, List } from 'immutable';
 
-export const shuffle = (array) => {
+import seedrandom from 'seedrandom';
+
+export const shuffle = (array, seed) => {
     let j, x, i;
     for (i = array.length; i; i -= 1) {
-        j = Math.floor(Math.random() * i);
+        j = Math.floor(seedrandom(seed + i)() * i);
         x = array[i - 1];
         array[i - 1] = array[j];
         array[j] = x;
@@ -11,7 +13,7 @@ export const shuffle = (array) => {
 };
 
 
-export const newDeck = () => {
+export const newDeck = (seed) => {
     const colour = ['red','green','purple'];
     const number = ['one','two','three'];
     const shape = ['diamond','squiggle','oval'];
@@ -28,7 +30,7 @@ export const newDeck = () => {
         });
     });
 
-    shuffle(deck);
+    shuffle(deck, seed);
     return fromJS(deck);
 
 };
@@ -39,9 +41,9 @@ export const newDeck = () => {
 //     return [newDeck, dealtCards];
 // }
 
-export const deal = (deck, n) => {
+export const deal = (deck, n, seed) => {
    if(n == 1) {
-       const r = Math.floor(Math.random() * deck.size);
+       const r = Math.floor(seedrandom(seed)() * deck.size);
        let dealtCards = new List([deck.get(r)]);
        let newDeck = deck.remove(r);
        return [newDeck, dealtCards]
@@ -50,7 +52,7 @@ export const deal = (deck, n) => {
    let dealtCards = new List();
    let newDeck = deck;
    for(let i = 0; i < n; i += 1) {
-       let [d, c] = deal(newDeck, 1);
+       let [d, c] = deal(newDeck, 1, seed + i);
        dealtCards = dealtCards.push(c.first());
        newDeck = d;
    }

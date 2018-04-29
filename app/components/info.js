@@ -1,5 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { dealToTable } from '../../app/action_creators';
+
 
 
 export class Info extends React.Component{
@@ -11,7 +13,7 @@ export class Info extends React.Component{
             <p>score:</p>
             <p id="wins">{this.props.score}</p>
           </div>
-          <button onClick={this.propps.onClickDeal}>Deal 3 more</button>
+          <button onClick={this.props.onClickDeal}>Deal 3 more</button>
         </div>
     );
   }
@@ -24,4 +26,13 @@ function mapStateToProps(state) {
  };
 }
 
-export const InfoContainer = connect(mapStateToProps)(Info);
+function mapDispatchToProps(dispatch){
+  return{
+    onClickDeal: () => {
+      dispatch(dealToTable())
+    }
+  }
+}
+
+
+export const InfoContainer = connect(mapStateToProps, mapDispatchToProps)(Info);

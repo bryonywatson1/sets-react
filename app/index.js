@@ -14,6 +14,8 @@ import css from './css/styles.css'
 
 let store = createStore(reducer, undefined, window.devToolsExtension ? window.devToolsExtension() : undefined);
 
+let compareClicks = [];
+
 
 
 store.dispatch(setupGame());

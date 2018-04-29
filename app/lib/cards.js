@@ -1,4 +1,4 @@
-// import { fromJS } from 'immutable';
+import { fromJS, List } from 'immutable';
 
 export const shuffle = (array) => {
     let j, x, i;
@@ -13,7 +13,7 @@ export const shuffle = (array) => {
 
 export const newDeck = () => {
     const colour = ['red','green','purple'];
-    const number = [1,2,3];
+    const number = ['one','two','three'];
     const shape = ['diamond','squiggle','oval'];
     const fill = ['solid','stripe','stroke'];
     const deck = [];
@@ -29,12 +29,30 @@ export const newDeck = () => {
     });
 
     shuffle(deck);
-    return deck;
-    // return fromJS(deck);
+    return fromJS(deck);
 
 };
 
-export const deal = (deck,n) => {
-    let dealt_cards = deck.splice(-n, n);
-    return[deck, dealt_cards];
-}
+// export const deal = (deck,n) => {
+//     let dealtCards = deck.takeLast(n);
+//     let newDeck = deck.skipLast(n);
+//     return [newDeck, dealtCards];
+// }
+
+export const deal = (deck, n) => {
+   if(n == 1) {
+       const r = Math.floor(Math.random() * deck.size);
+       let dealtCards = new List([deck.get(r)]);
+       let newDeck = deck.remove(r);
+       return [newDeck, dealtCards]
+   }
+
+   let dealtCards = new List();
+   let newDeck = deck;
+   for(let i = 0; i < n; i += 1) {
+       let [d, c] = deal(newDeck, 1);
+       dealtCards = dealtCards.push(c.first());
+       newDeck = d;
+   }
+   return [newDeck, dealtCards];
+};

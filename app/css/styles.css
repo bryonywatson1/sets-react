@@ -356,3 +356,7 @@ h1{
   mask-image: url(cards/roundedstripe1.png);
 
 }
+
+#app{
+	height:100%;
+}

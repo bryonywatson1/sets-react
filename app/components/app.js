@@ -5,12 +5,11 @@ import Table from './table';
 
 export default class App extends React.Component {
     render() {
-        console.log(this.props.state.cardsOnTable);
+        console.log(this.props.state.get('cardsOnTable'));
         return (
-          // <div className="app">
-            {/* <Info setsFound={this.props.state.setsFound}/> */}
-            <Table cards={this.props.state.cardsOnTable}/>
-          {/* </div> */}
+          <div id="wrapper">
+            <Table cards={this.props.state.get('cardsOnTable')}/>
+          </div>
         );
     }
 };

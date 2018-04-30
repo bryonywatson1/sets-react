@@ -1,6 +1,8 @@
 import React from 'react';
 
 import { connect } from 'react-redux';
+import { fromJS, List, Get } from 'immutable';
+
 
 let numberOfClicked = 0;
 
@@ -15,24 +17,25 @@ export class Card extends React.Component {
 	}
 
 	handleClick() {
+		console.log(this.props.cardsOnTable)
 		this.setState({
       clicked: !this.state.clicked
     });
 		if (this.state.clicked) {
 			// compareClicks.splice(-1,1)
-			console.log('unclicked');
+			// console.log('unclicked');
 			numberOfClicked--;
-			console.log(numberOfClicked)
+			// console.log(numberOfClicked)
 		} else {
 			// compareClicks.push(this.props);
-			console.log('clicked');
+			// console.log('clicked');
 			numberOfClicked++;
-			console.log(numberOfClicked)
+			// console.log(numberOfClicked)
 		};
 		if (numberOfClicked == 3){
-			console.log('3 clicked!')
+
 			numberOfClicked == 0;
-			checkIfSet()
+			checkIfSet(this.props.cardsOnTable)
 		}
 
 	}
@@ -46,15 +49,32 @@ export class Card extends React.Component {
 	};
 }
 
-export const checkIfSet = () => {
-	console.log(this.props.cardsOnTable);
-	let cards = this.props.cardsOnTable;
-	const clickedCards = cards.find(function(card){return card.get('clicked') === true;});
-	// const clickedCards = cards.filter((card) => card.get('clicked') == true);
-	console.log(clickedCards);
-	console.log(clickedCards[0]);
-console.log(clickedCards[1]);
-console.log(clickedCards[2])
+export const checkIfSet = (cards) => {
+	const clickedCards = [];
+
+cards.forEach(function(card){
+	if (card.state.clicked === "clicked"){
+
+		console.log("succesfully checked card was clicked" + card )
+
+
+};
+
+console.log("definitely did for each" + card )
+
+	// console.log(card.get(shape));
+
+	// clickedCards.push(card)
+});
+console.log(clickedCards)
+
+// 	console.log('what I see inside checkifset' + cards)
+// 	const clickedCards = cards.find(function(card){return card.get('clicked') === true;});
+// 	// const clickedCards = cards.filter((card) => card.get('clicked') == true);
+// 	console.log(clickedCards);
+// 	console.log(clickedCards[0]);
+// console.log(clickedCards[1]);
+// console.log(clickedCards[2])
 }
 
 function mapStateToProps(state) {

@@ -24,7 +24,7 @@ export const newDeck = (seed) => {
         number.forEach((n) =>{
             shape.forEach((s) =>{
                 fill.forEach((f) =>{
-                    deck.push({'colour':c, 'number':n, 'shape':s, 'fill':f});
+                    deck.push({'colour':c, 'number':n, 'shape':s, 'fill':f,});
                 });
             });
         });
